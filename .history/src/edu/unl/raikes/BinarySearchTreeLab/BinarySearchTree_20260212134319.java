@@ -1,5 +1,8 @@
 package edu.unl.raikes.BinarySearchTreeLab;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * BinarySearchTree.
  */
@@ -91,7 +94,7 @@ public class BinarySearchTree {
 		String toReturn = "Binary Search Tree of Size: " + size + "\n";
 	
 		if (this.root != null) {
-			toReturn += this.root.toString();
+			toReturn = this.root.toString();
 		}
 
 		return toReturn;

@@ -38,13 +38,13 @@ class BinarySearchNode {
 				return leftChild.insert(data);
 			}
 		}
-		// Right side
+		// TODO: ADD COMMENT
 		else if (Integer.compare(data.key, person.key) > 0) {
-			// If right child is empty
+			// TODO: ADD COMMENT
 			if (rightChild == null) {
 				setRightChild(new BinarySearchNode(data));
 				return true;
-			} // If right child is not empty
+			} // TODO: ADD COMMENT
 			else {
 				return rightChild.insert(data);
 			}
@@ -52,62 +52,54 @@ class BinarySearchNode {
 		return false;
 	}
 
-	/**
-	 * Search for data.
-	 * @param key Key.
-	 * @return Data.
-	 */
+	// TODO: ADD JAVADOC COMMENT
 	BinarySearchNode search(int key) {
-		// If key is smaller than root
+		// TODO: ADD COMMENT
 		if (leftChild != null && Integer.compare(key, person.key) < 0) {
 			return leftChild.search(key);
 		}
-		// If key is lareger than root
+		// TODO: ADD COMMENT
 		else if (rightChild != null && Integer.compare(key, person.key) > 0) {
 			return rightChild.search(key);
 		}
-		// If key is equal to root
+		// TODO: ADD COMMENT
 		else if (this.person.key == key) {
 			return this;
 		}
-		// If key is not found
+		// TODO: ADD COMMENT
 		else {
 			return null;
 		}
 	}
 
-	/**
-	 * Delete data.
-	 * @param key Key.
-	 * @return Data.
-	 */
+	// TODO: ADD JAVADOC COMMENT
 	Person delete(int key) {
-		// Find data
+		// TODO: ADD COMMENT
 		BinarySearchNode node = search(key);
 		if (node == null)
 			return null;
 		Person deleted = node.person;
 
-		// If node does not have any children
+		// TODO: ADD COMMENT
 		if (node.leftChild == null && node.rightChild == null) {
 			if (node.parent.leftChild == node)
 				node.parent.setLeftChild(null);
 			else if (node.parent.rightChild == node)
 				node.parent.setRightChild(null);
 		}
-		// If node has children
+		// TODO: ADD COMMENT
 		else if (node.leftChild != null && node.rightChild != null) {
 			BinarySearchNode min = node.rightChild.getNodeWithMinValue();
 			node.person = min.person;
 			int minKey = min.person.key;
 			min.delete(minKey);
 		}
-
+		// TODO: ADD COMMENT
 		else if (node.parent.leftChild == node) {
 			BinarySearchNode newLeftChild = (node.leftChild != null) ? node.leftChild : node.rightChild;
 			node.parent.setLeftChild(newLeftChild);
 		}
-
+		// TODO: ADD COMMENT
 		else if (node.parent.rightChild == node) {
 			BinarySearchNode newRightChild = (node.leftChild != null) ? node.leftChild : node.rightChild;
 			node.parent.setRightChild(newRightChild);
@@ -116,10 +108,7 @@ class BinarySearchNode {
 		return deleted;
 	}
 
-	/**
-	 * Find minimum value.
-	 * @return Minimum value.
-	 */
+	// TODO: ADD JAVADOC COMMENT
 	BinarySearchNode getNodeWithMinValue() {
 		if (leftChild == null)
 			return this;
@@ -127,42 +116,26 @@ class BinarySearchNode {
 			return leftChild.getNodeWithMinValue();
 	}
 
-	/**
-	 * Set the left child.
-	 * @param child Left child.
-	 */
+	// TODO: ADD JAVADOC COMMENT
 	void setLeftChild(BinarySearchNode child) {
 		this.leftChild = child;
 		if (child != null)
 			child.parent = this;
 	}
 
-	/**
-	 * Set right child.
-	 * @param child Right child.
-	 */
+	// TODO: ADD JAVADOC COMMENT
 	void setRightChild(BinarySearchNode child) {
 		this.rightChild = child;
 		if (child != null)
 			child.parent = this;
 	}
 
-	/**
-	 * Convert node to String!
-	 */
+	// TODO: ADD JAVADOC COMMENT (WHAT KIND OF SEARCH SHOULD THIS BE???)
 	public String toString() {
 		String toReturn = "";
-
-		if (this.leftChild != null) {
-			toReturn += this.leftChild.toString();
-		}
 		
-		// Return node as string!
+		// TODO: ADD COMMENT
 		toReturn += "  " + person.toString() + "\n";
-		
-		if (this.rightChild != null) {
-			toReturn += this.rightChild.toString();
-		}
 
 		return toReturn;
 	}

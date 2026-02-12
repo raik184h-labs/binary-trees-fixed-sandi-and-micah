@@ -148,7 +148,7 @@ class BinarySearchNode {
 	}
 
 	/**
-	 * Convert node to String!
+	 * 
 	 */
 	public String toString() {
 		String toReturn = "";

@@ -1,5 +1,8 @@
 package edu.unl.raikes.BinarySearchTreeLab;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * BinarySearchTree.
  */
@@ -90,10 +93,31 @@ public class BinarySearchTree {
 	public String toString() {
 		String toReturn = "Binary Search Tree of Size: " + size + "\n";
 	
-		if (this.root != null) {
-			toReturn += this.root.toString();
+		// Get ArrayList of nodes
+		List<BinarySearchNode> nodes = new ArrayList<>();
+		this.toStringHelper(nodes, this.root);
+
+		// Addd ArrayList of nodes to return!
+		for (BinarySearchNode node : nodes) {
+			toReturn += node;
 		}
 
 		return toReturn;
 	}
+
+	/**
+	 * Helper function.
+	 * @param nodes ArrayList of nodes.
+	 * @param node Current node.
+	 */
+	public void toStringHelper(List<BinarySearchNode> nodes, BinarySearchNode node) {
+		if (node ==  null) {
+			return;
+		}
+
+		this.toStringHelper(nodes, node.leftChild);
+		nodes.add(node);
+		this.toStringHelper(nodes, node.rightChild);
+	}
+
 }

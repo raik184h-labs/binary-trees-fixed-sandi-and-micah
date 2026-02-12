@@ -1,45 +1,36 @@
 package edu.unl.raikes.BinarySearchTreeLab;
 
-/**
- * BinarySearchTree.
- */
+//TODO: ADD JAVADOC COMMENT
 public class BinarySearchTree {
 	boolean verbose = true;
 	private BinarySearchNode root = null;
 	private int size = 0;
 
-	/**
-	 * Insert data into the binary tree.
-	 * @param data Data.
-	 */
+	// TODO: ADD JAVADOC COMMENT
 	public void insert(Person data) {
 		boolean inserted = false;
-		// Found position if root is null.
+		// TODO: ADD COMMENT
 		if (root == null) {
 			root = new BinarySearchNode(data);
 			inserted = true;
-		} // Continue searching
+		} // TODO: ADD COMMENT
 		else {
 			inserted = root.insert(data);
-		} // If added, increase the size
+		} // TODO: ADD COMMENT
 		if (inserted) {
 			size++;
 		}
 	}
 
-	/**
-	 * Using key to find value in binary tree.
-	 * @param key Key.
-	 * @return Value.
-	 */
+	// TODO: ADD JAVADOC COMMENT
 	public Person search(int key) {
-		// If data cannot be found.
+		// TODO: ADD COMMENT
 		if (root == null) {
 			return null;
 		}
-		// Recursion
+		// TODO: ADD COMMENT
 		BinarySearchNode found = root.search(key);
-		// Data is found
+		// TODO: ADD COMMENT
 		if (found != null) {
 			return found.person;
 		} else {
@@ -48,52 +39,61 @@ public class BinarySearchTree {
 
 	}
 
-	/**
-	 * Delete data from tree.
-	 * @param key Key.
-	 * @return Deleted data.
-	 */
+	// TODO: ADD JAVADOC COMMENT
 	public Person delete(int key) {
 		Person deleted = null;
 
-		// Data to be deleted was not found
+		// TODO: ADD COMMENT
 		if (root == null) {
 			return null;
-		} // Data exists in tree
+		} // TODO: ADD COMMENT
 		else {
-			// Found the data
+			// TODO: ADD COMMENT
 			if (root.person.key == key) {
 				// add fake root in case the element to be removed is the root.
 				// (simplifies pointer logic)
 				BinarySearchNode auxRoot = new BinarySearchNode(null);
 				auxRoot.setLeftChild(root);
-				// Delete the data
+				// TODO: ADD COMMENT
 				deleted = root.delete(key);
 				// retrieve the root from the fake root (in case it changed)
 				root = auxRoot.leftChild;
-				// No children
+				// TODO: ADD COMMENT
 				if (root != null)
 					root.parent = null;
-			} // Continuse searching
+			} // TODO: ADD COMMENT
 			else {
 				deleted = root.delete(key);
-			} // Decrease size of tree
+			} // TODO: ADD COMMENT
 			if (deleted != null)
 				size--;
 			return deleted;
 		}
 	}
 
-	/**
-	 * Returns BinarySearchTree as String.
-	 */
+	// TODO: ADD JAVADOC COMMENT
 	public String toString() {
 		String toReturn = "Binary Search Tree of Size: " + size + "\n";
-	
-		if (this.root != null) {
-			toReturn += this.root.toString();
+		// TODO: ADD COMMENT
+		if (root != null) {
+			toReturn += root.toString();
 		}
+
+		this.toStringHelper("", this.root);
 
 		return toReturn;
 	}
+
+	public String toStringHelper(String s, BinarySearchNode node) {
+		if (node ==  null) {
+			return s;
+		}
+
+		s+= this.toStringHelper(s, node.leftChild);
+		s += node.toString();
+		s+= this.toStringHelper(s, node.rightChild);
+
+		return s;
+	}
+
 }

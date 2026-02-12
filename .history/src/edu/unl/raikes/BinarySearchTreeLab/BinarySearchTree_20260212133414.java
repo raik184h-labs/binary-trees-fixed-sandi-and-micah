@@ -1,5 +1,8 @@
 package edu.unl.raikes.BinarySearchTreeLab;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * BinarySearchTree.
  */
@@ -56,28 +59,28 @@ public class BinarySearchTree {
 	public Person delete(int key) {
 		Person deleted = null;
 
-		// Data to be deleted was not found
+		// TODO: ADD COMMENT
 		if (root == null) {
 			return null;
-		} // Data exists in tree
+		} // TODO: ADD COMMENT
 		else {
-			// Found the data
+			// TODO: ADD COMMENT
 			if (root.person.key == key) {
 				// add fake root in case the element to be removed is the root.
 				// (simplifies pointer logic)
 				BinarySearchNode auxRoot = new BinarySearchNode(null);
 				auxRoot.setLeftChild(root);
-				// Delete the data
+				// TODO: ADD COMMENT
 				deleted = root.delete(key);
 				// retrieve the root from the fake root (in case it changed)
 				root = auxRoot.leftChild;
-				// No children
+				// TODO: ADD COMMENT
 				if (root != null)
 					root.parent = null;
-			} // Continuse searching
+			} // TODO: ADD COMMENT
 			else {
 				deleted = root.delete(key);
-			} // Decrease size of tree
+			} // TODO: ADD COMMENT
 			if (deleted != null)
 				size--;
 			return deleted;
@@ -90,10 +93,31 @@ public class BinarySearchTree {
 	public String toString() {
 		String toReturn = "Binary Search Tree of Size: " + size + "\n";
 	
-		if (this.root != null) {
-			toReturn += this.root.toString();
+		// Get ArrayList of nodes
+		List<BinarySearchNode> nodes = new ArrayList<>();
+		this.toStringHelper(nodes, this.root);
+
+		// Addd ArrayList of nodes to return!
+		for (BinarySearchNode node : nodes) {
+			toReturn += node;
 		}
 
 		return toReturn;
 	}
+
+	/**
+	 * Helper function.
+	 * @param nodes ArrayList of nodes.
+	 * @param node Current node.
+	 */
+	public void toStringHelper(List<BinarySearchNode> nodes, BinarySearchNode node) {
+		if (node ==  null) {
+			return;
+		}
+
+		this.toStringHelper(nodes, node.leftChild);
+		nodes.add(node);
+		this.toStringHelper(nodes, node.rightChild);
+	}
+
 }
